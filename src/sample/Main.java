@@ -38,6 +38,9 @@ public class Main extends Application {
     Button testDisplayName;
     Scene scene5;
     Button backPlayerPlayer2;
+    VBox playerName_VBox2;
+    TextField playerName2;
+    Button testDisplayName2;
 
     @Override
     public void start(Stage window) throws Exception{
@@ -56,6 +59,8 @@ O = new Button("O");
 backPlayerPlayer = new Button("Back");
 testDisplayName = new Button("Display Player Name");
 backPlayerPlayer2 = new Button("Back");
+testDisplayName2 = new Button("Display player name and continue.");
+playerName2 = new TextField();
 
 //        GridPane grid = new GridPane();
 //
@@ -111,7 +116,7 @@ backPlayerPlayer.setOnAction(e -> window.setScene(scene3));
 testDisplayName.setOnAction(new EventHandler<ActionEvent>() {
     @Override
     public void handle(ActionEvent event) {
-        System.out.println(playerName.getText());
+        System.out.println("Player 1: " + playerName.getText());
         }
     }
 );
@@ -124,20 +129,27 @@ O.setOnAction(e -> window.setScene(scene5));
 
 BorderPane scene5_layout = new BorderPane();
 HBox XOChoiceP2 = new HBox(60);
-playerName_VBox = new VBox(10);
-playerName_VBox.getChildren().addAll(playerName,testDisplayName);
-scene5_layout.setCenter(playerName_VBox);
+playerName_VBox2 = new VBox(10);
+playerName_VBox2.getChildren().addAll(playerName2,testDisplayName2);
+scene5_layout.setCenter(playerName_VBox2);
 playerName.setPromptText("Player 2, enter your name.");
 
 XOChoiceP2.getChildren().add(backPlayerPlayer2);
-scene5_layout.setBottom(XOChoice);
+scene5_layout.setBottom(XOChoiceP2);
 scene5 = new Scene(scene5_layout, 210, 300);
 
 backPlayerPlayer2.setOnAction(e -> window.setScene(scene4));
-testDisplayName.setOnAction(new EventHandler<ActionEvent>() {
+testDisplayName2.setOnAction(new EventHandler<ActionEvent>() {
     @Override
     public void handle(ActionEvent event) {
-        System.out.println(playerName.getText());
+        System.out.println("Player 2: " + playerName2.getText());
+        //below println is just for testing to see if it can remember what was entered for a name on scene4 in other
+        // scenes or if a variable needs to be made to store the name in.
+
+        //System.out.println("It is now " + playerName.getText() + "'s turn.");
+
+        //result: it remembers.
+        //also, the displayname button doesn't need to be pressed for the name to be remembered, that helps.
         }
     }
 );
