@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Pos;
@@ -41,6 +43,22 @@ public class Main extends Application {
     VBox playerName_VBox2;
     TextField playerName2;
     Button testDisplayName2;
+  //  Button testButtonText;
+   // Scene buttonTextChangeTester;
+    private boolean xturn;
+    Label X0Y0;
+    Label X0Y1;
+    Label X0Y2;
+    Label X1Y0;
+    Label X1Y1;
+    Label X1Y2;
+    Label X2Y0;
+    Label X2Y1;
+    Label X2Y2;
+    Scene sceneGameBoard;
+//    Label X3Y0;
+//    Label X3Y1;
+//    Label X3Y2;
 
     @Override
     public void start(Stage window) throws Exception{
@@ -61,6 +79,20 @@ testDisplayName = new Button("Display Player Name");
 backPlayerPlayer2 = new Button("Back");
 testDisplayName2 = new Button("Display player name and continue.");
 playerName2 = new TextField();
+//testButtonText = new Button(" ");
+        //temporarily the labels will not have blank text for testing to make sure they all show up.
+X0Y0 = new Label("1");
+X0Y1 = new Label("1");
+X0Y2 = new Label("1");
+X1Y0 = new Label("1");
+X1Y1 = new Label("1");
+X1Y2 = new Label("1");
+X2Y0 = new Label("1");
+X2Y1 = new Label("1");
+X2Y2 = new Label("1");
+//X3Y0 = new Label("1");
+//X3Y1 = new Label("1");
+//X3Y2 = new Label("1");
 
 //        GridPane grid = new GridPane();
 //
@@ -122,9 +154,11 @@ testDisplayName.setOnAction(new EventHandler<ActionEvent>() {
 );
 
 X.setOnAction(e -> window.setScene(scene5));
+xturn = true;
 //add method that sets Player 1's piece to X and Player 2's to O.
 
 O.setOnAction(e -> window.setScene(scene5));
+xturn = false;
 //for the method used with X, add other branch (if X, else if O, else) to set Player 1's piece to O and Player 2's to X.
 
 BorderPane scene5_layout = new BorderPane();
@@ -143,9 +177,10 @@ testDisplayName2.setOnAction(new EventHandler<ActionEvent>() {
     @Override
     public void handle(ActionEvent event) {
         System.out.println("Player 2: " + playerName2.getText());
+        window.setScene(sceneGameBoard);
         //below println is just for testing to see if it can remember what was entered for a name on scene4 in other
         // scenes or if a variable needs to be made to store the name in.
-
+    //    window.setScene(buttonTextChangeTester);
         //System.out.println("It is now " + playerName.getText() + "'s turn.");
 
         //result: it remembers.
@@ -153,8 +188,71 @@ testDisplayName2.setOnAction(new EventHandler<ActionEvent>() {
         }
     }
 );
+//BorderPane buttonTextChangeTester_layout = new BorderPane();
+//buttonTextChangeTester_layout.getChildren().add(testButtonText);
+//buttonTextChangeTester_layout.setCenter(testButtonText);
+//buttonTextChangeTester = new Scene(buttonTextChangeTester_layout, 200, 200);
+//
+//testButtonText.setOnMouseClicked(testButtonText.setText("X"));
 
+GridPane gameBoard_Layout = new GridPane();
+gameBoard_Layout.setAlignment(Pos.CENTER);
+gameBoard_Layout.setGridLinesVisible(true);
+//gameBoard_Layout.setHgap(20);
+//gameBoard_Layout.setVgap(20);
+//        X0Y0.relocate(50,50);
+//        X0Y1.relocate(150,100);
+//        X0Y2.relocate(150,150);
+//        X1Y0.relocate(100,50);
+//        X1Y1.relocate(100,100);
+//        X1Y2.relocate(100,150);
+//        X2Y0.relocate(150,50);
+//        X2Y1.relocate(150,100);
+//        X2Y2.relocate(150,150);
+Rectangle R1 = new Rectangle(30,30);
+Rectangle R2 = new Rectangle(30,30);
+Rectangle R3 = new Rectangle(30,30);
+Rectangle R4 = new Rectangle(30,30);
+Rectangle R5 = new Rectangle(30,30);
+Rectangle R6 = new Rectangle(30,30);
+Rectangle R7 = new Rectangle(30,30);
+Rectangle R8 = new Rectangle(30,30);
+Rectangle R9 = new Rectangle(30,30);
+R1.setFill(Color.WHITE);
+R2.setFill(Color.WHITE);
+R3.setFill(Color.WHITE);
+R4.setFill(Color.WHITE);
+R5.setFill(Color.WHITE);
+R6.setFill(Color.WHITE);
+R7.setFill(Color.WHITE);
+R8.setFill(Color.WHITE);
+R9.setFill(Color.WHITE);
 
+//row is Y, column is X
+    gameBoard_Layout.add(R1,0,0);
+gameBoard_Layout.add(X0Y0, 0,0);
+    gameBoard_Layout.add(R2,1,0);
+gameBoard_Layout.add(X1Y0, 1,0);
+    gameBoard_Layout.add(R3,2,0);
+gameBoard_Layout.add(X2Y0, 2,0);
+    gameBoard_Layout.add(R4,0,1);
+gameBoard_Layout.add(X0Y1, 0,1);
+    gameBoard_Layout.add(R5,1,1);
+gameBoard_Layout.add(X1Y1, 1,1);
+    gameBoard_Layout.add(R6,2,1);
+gameBoard_Layout.add(X2Y1, 2,1);
+    gameBoard_Layout.add(R7,0,2);
+gameBoard_Layout.add(X0Y2, 0,2);
+    gameBoard_Layout.add(R8,1,2);
+gameBoard_Layout.add(X1Y2, 1,2);
+    gameBoard_Layout.add(R9,2,2);
+gameBoard_Layout.add(X2Y2, 2,2);
+
+//gameBoard_Layout.add(X3Y0, 3,0);
+//gameBoard_Layout.add(X3Y1, 3,1);
+//gameBoard_Layout.add(X3Y2, 3,2);
+
+sceneGameBoard = new Scene(gameBoard_Layout,300,300);
 
         window.setScene(scene1);
 
