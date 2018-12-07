@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -59,6 +60,7 @@ public class Main extends Application {
 //    Label X3Y0;
 //    Label X3Y1;
 //    Label X3Y2;
+    private String piece;
 
     @Override
     public void start(Stage window) throws Exception{
@@ -81,18 +83,19 @@ testDisplayName2 = new Button("Display player name and continue.");
 playerName2 = new TextField();
 //testButtonText = new Button(" ");
         //temporarily the labels will not have blank text for testing to make sure they all show up.
-X0Y0 = new Label("1");
-X0Y1 = new Label("1");
-X0Y2 = new Label("1");
-X1Y0 = new Label("1");
-X1Y1 = new Label("1");
-X1Y2 = new Label("1");
-X2Y0 = new Label("1");
-X2Y1 = new Label("1");
-X2Y2 = new Label("1");
+X0Y0 = new Label("   1");
+X0Y1 = new Label("   1");
+X0Y2 = new Label("   1");
+X1Y0 = new Label("   1");
+X1Y1 = new Label("   1");
+X1Y2 = new Label("   1");
+X2Y0 = new Label("   1");
+X2Y1 = new Label("   1");
+X2Y2 = new Label("   1");
 //X3Y0 = new Label("1");
 //X3Y1 = new Label("1");
 //X3Y2 = new Label("1");
+piece = " ";
 
 //        GridPane grid = new GridPane();
 //
@@ -153,12 +156,26 @@ testDisplayName.setOnAction(new EventHandler<ActionEvent>() {
     }
 );
 
-X.setOnAction(e -> window.setScene(scene5));
-xturn = true;
+X.setOnAction(new EventHandler<ActionEvent>() {
+    @Override
+    public void handle(ActionEvent event) {
+        window.setScene(scene5);
+        xturn = true;
+        System.out.println(xturn);
+    }
+});
+
 //add method that sets Player 1's piece to X and Player 2's to O.
 
-O.setOnAction(e -> window.setScene(scene5));
-xturn = false;
+O.setOnAction(new EventHandler<ActionEvent>() {
+    @Override
+    public void handle(ActionEvent event) {
+        window.setScene(scene5);
+        xturn = false;
+        System.out.println(xturn);
+    }
+});
+
 //for the method used with X, add other branch (if X, else if O, else) to set Player 1's piece to O and Player 2's to X.
 
 BorderPane scene5_layout = new BorderPane();
@@ -219,34 +236,178 @@ Rectangle R7 = new Rectangle(30,30);
 Rectangle R8 = new Rectangle(30,30);
 Rectangle R9 = new Rectangle(30,30);
 R1.setFill(Color.WHITE);
-R2.setFill(Color.WHITE);
+R2.setFill(Color.BLACK);
 R3.setFill(Color.WHITE);
-R4.setFill(Color.WHITE);
+R4.setFill(Color.BLACK);
 R5.setFill(Color.WHITE);
-R6.setFill(Color.WHITE);
+R6.setFill(Color.BLACK);
 R7.setFill(Color.WHITE);
-R8.setFill(Color.WHITE);
+R8.setFill(Color.BLACK);
 R9.setFill(Color.WHITE);
 
 //row is Y, column is X
-    gameBoard_Layout.add(R1,0,0);
-gameBoard_Layout.add(X0Y0, 0,0);
-    gameBoard_Layout.add(R2,1,0);
-gameBoard_Layout.add(X1Y0, 1,0);
-    gameBoard_Layout.add(R3,2,0);
-gameBoard_Layout.add(X2Y0, 2,0);
-    gameBoard_Layout.add(R4,0,1);
-gameBoard_Layout.add(X0Y1, 0,1);
-    gameBoard_Layout.add(R5,1,1);
-gameBoard_Layout.add(X1Y1, 1,1);
-    gameBoard_Layout.add(R6,2,1);
-gameBoard_Layout.add(X2Y1, 2,1);
-    gameBoard_Layout.add(R7,0,2);
-gameBoard_Layout.add(X0Y2, 0,2);
-    gameBoard_Layout.add(R8,1,2);
-gameBoard_Layout.add(X1Y2, 1,2);
-    gameBoard_Layout.add(R9,2,2);
-gameBoard_Layout.add(X2Y2, 2,2);
+gameBoard_Layout.add(R1,0,0);
+    gameBoard_Layout.add(X0Y0, 0,0);
+
+gameBoard_Layout.add(R2,1,0);
+    gameBoard_Layout.add(X1Y0, 1,0);
+    X1Y0.setTextFill(Color.WHITE);
+
+gameBoard_Layout.add(R3,2,0);
+    gameBoard_Layout.add(X2Y0, 2,0);
+
+gameBoard_Layout.add(R4,0,1);
+    gameBoard_Layout.add(X0Y1, 0,1);
+    X0Y1.setTextFill(Color.WHITE);
+
+gameBoard_Layout.add(R5,1,1);
+    gameBoard_Layout.add(X1Y1, 1,1);
+
+gameBoard_Layout.add(R6,2,1);
+    gameBoard_Layout.add(X2Y1, 2,1);
+    X2Y1.setTextFill(Color.WHITE);
+
+gameBoard_Layout.add(R7,0,2);
+    gameBoard_Layout.add(X0Y2, 0,2);
+
+gameBoard_Layout.add(R8,1,2);
+    gameBoard_Layout.add(X1Y2, 1,2);
+    X1Y2.setTextFill(Color.WHITE);
+
+gameBoard_Layout.add(R9,2,2);
+    gameBoard_Layout.add(X2Y2, 2,2);
+
+    //following is a test
+    R1.setOnMousePressed(new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+         //   if(X0Y0.equals("1")) {
+                piece = xturn? "   X": "   O";
+                X0Y0.setText(piece);
+                xturn = !xturn;
+                //need to prevent user from overriding a square that's already been used.
+            }
+
+      //  }
+    }
+);
+
+        R1.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                 @Override
+                                 public void handle(MouseEvent event) {
+                                     // if(X0Y0.equals(1)) {
+                                     piece = xturn? "   X": "   O";
+                                     X0Y0.setText(piece);
+                                     xturn = !xturn;
+                                 }
+
+                                 // }
+                             }
+        );
+
+        R2.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                 @Override
+                                 public void handle(MouseEvent event) {
+                                     // if(X0Y0.equals(1)) {
+                                     piece = xturn? "   X": "   O";
+                                     X1Y0.setText(piece);
+                                     xturn = !xturn;
+                                 }
+
+                                 // }
+                             }
+        );
+
+        R3.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                 @Override
+                                 public void handle(MouseEvent event) {
+                                     // if(X0Y0.equals(1)) {
+                                     piece = xturn? "   X": "   O";
+                                     X2Y0.setText(piece);
+                                     xturn = !xturn;
+                                 }
+
+                                 // }
+                             }
+        );
+
+        R4.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                 @Override
+                                 public void handle(MouseEvent event) {
+                                     // if(X0Y0.equals(1)) {
+                                     piece = xturn? "   X": "   O";
+                                     X0Y1.setText(piece);
+                                     xturn = !xturn;
+                                 }
+
+                                 // }
+                             }
+        );
+
+        R5.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                 @Override
+                                 public void handle(MouseEvent event) {
+                                     // if(X0Y0.equals(1)) {
+                                     piece = xturn? "   X": "   O";
+                                     X1Y1.setText(piece);
+                                     xturn = !xturn;
+                                 }
+
+                                 // }
+                             }
+        );
+
+        R6.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                 @Override
+                                 public void handle(MouseEvent event) {
+                                     // if(X0Y0.equals(1)) {
+                                     piece = xturn? "   X": "   O";
+                                     X2Y1.setText(piece);
+                                     xturn = !xturn;
+                                 }
+
+                                 // }
+                             }
+        );
+
+        R7.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                 @Override
+                                 public void handle(MouseEvent event) {
+                                     // if(X0Y0.equals(1)) {
+                                     piece = xturn? "   X": "   O";
+                                     X0Y2.setText(piece);
+                                     xturn = !xturn;
+                                 }
+
+                                 // }
+                             }
+        );
+
+        R8.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                 @Override
+                                 public void handle(MouseEvent event) {
+                                     // if(X0Y0.equals(1)) {
+                                     piece = xturn? "   X": "   O";
+                                     X1Y2.setText(piece);
+                                     xturn = !xturn;
+                                 }
+
+                                 // }
+                             }
+        );
+
+        R9.setOnMousePressed(new EventHandler<MouseEvent>() {
+                                 @Override
+                                 public void handle(MouseEvent event) {
+                                     // if(X0Y0.equals(1)) {
+                                     piece = xturn? "   X": "   O";
+                                     X2Y2.setText(piece);
+                                     xturn = !xturn;
+                                 }
+
+                                 // }
+                             }
+        );
 
 //gameBoard_Layout.add(X3Y0, 3,0);
 //gameBoard_Layout.add(X3Y1, 3,1);
