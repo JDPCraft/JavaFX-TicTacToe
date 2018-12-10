@@ -56,6 +56,7 @@ public class Main extends Application {
     Label X2Y0;
     Label X2Y1;
     Label X2Y2;
+    Label[] cells;
     Scene sceneGameBoard;
 //    Label X3Y0;
 //    Label X3Y1;
@@ -83,6 +84,10 @@ testDisplayName2 = new Button("Display player name and continue.");
 playerName2 = new TextField();
 //testButtonText = new Button(" ");
         //temporarily the labels will not have blank text for testing to make sure they all show up.
+      /*  cells = new Label[9];
+        for (int i=0; i< cells.length;i++){
+            cells[i]= new Label("   1");
+        }*/
 X0Y0 = new Label("   1");
 X0Y1 = new Label("   1");
 X0Y2 = new Label("   1");
