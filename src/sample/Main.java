@@ -58,10 +58,24 @@ public class Main extends Application {
     Label X2Y2;
     Label[] cells;
     Scene sceneGameBoard;
+    String[] row;
+    String[] column;
 //    Label X3Y0;
 //    Label X3Y1;
 //    Label X3Y2;
     private String piece;
+
+//    public Main(String piece) {
+//        this.piece = piece;
+//    }
+//
+//    public String getPiece() {
+//        return piece;
+//    }
+//
+//    public void setPiece(String piece) {
+//        this.piece = piece;
+//    }
 
     @Override
     public void start(Stage window) throws Exception{
@@ -84,10 +98,15 @@ testDisplayName2 = new Button("Display player name and continue.");
 playerName2 = new TextField();
 //testButtonText = new Button(" ");
         //temporarily the labels will not have blank text for testing to make sure they all show up.
-      /*  cells = new Label[9];
+        cells = new Label[9];
         for (int i=0; i< cells.length;i++){
-            cells[i]= new Label("   1");
-        }*/
+            cells[i]= new Label("   ");
+        }
+
+        row = new String[3];
+        column = new String[3];
+//        for (int r=0; r<row.length; r++)
+
 X0Y0 = new Label("   1");
 X0Y1 = new Label("   1");
 X0Y2 = new Label("   1");
@@ -250,9 +269,11 @@ R7.setFill(Color.WHITE);
 R8.setFill(Color.BLACK);
 R9.setFill(Color.WHITE);
 
+
+
 //row is Y, column is X
 gameBoard_Layout.add(R1,0,0);
-    gameBoard_Layout.add(X0Y0, 0,0);
+    gameBoard_Layout.add(cells[0], 0,0);
 
 gameBoard_Layout.add(R2,1,0);
     gameBoard_Layout.add(X1Y0, 1,0);
@@ -283,30 +304,32 @@ gameBoard_Layout.add(R9,2,2);
     gameBoard_Layout.add(X2Y2, 2,2);
 
     //following is a test
-    R1.setOnMousePressed(new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-         //   if(X0Y0.equals("1")) {
-                piece = xturn? "   X": "   O";
-                X0Y0.setText(piece);
-                xturn = !xturn;
-                //need to prevent user from overriding a square that's already been used.
-            }
-
-      //  }
-    }
-);
+//    R1.setOnMousePressed(new EventHandler<MouseEvent>() {
+//        @Override
+//        public void handle(MouseEvent event) {
+//         //   if(X0Y0.equals("1")) {
+//                piece = xturn? "   X": "   O";
+//                X0Y0.setText(piece);
+//                xturn = !xturn;
+//                //need to prevent user from overriding a square that's already been used.
+//            }
+//
+//      //  }
+//    }
+//);
 
         R1.setOnMousePressed(new EventHandler<MouseEvent>() {
                                  @Override
                                  public void handle(MouseEvent event) {
-                                     // if(X0Y0.equals(1)) {
+                                    //ask Mr. Walters about this when possible
+                                     row[0]="0";
                                      piece = xturn? "   X": "   O";
-                                     X0Y0.setText(piece);
+                                     if(cells[0].equals("   ")) {
+                                     cells[0].setText(piece);
                                      xturn = !xturn;
                                  }
 
-                                 // }
+                                  }
                              }
         );
 
@@ -423,6 +446,16 @@ sceneGameBoard = new Scene(gameBoard_Layout,300,300);
         window.setScene(scene1);
 
         window.show();
+    }
+    boolean checkSpot(String[] row, String[] column){
+        if(cells[row][column].equals("")) {
+
+            cells[row][column].setText(piece);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 
