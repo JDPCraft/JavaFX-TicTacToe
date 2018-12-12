@@ -43,19 +43,20 @@ public class Main extends Application {
     Button backPlayerPlayer2;
     VBox playerName_VBox2;
     TextField playerName2;
-    Button testDisplayName2;
+    Button gameStart;
+    Scene scene6;
   //  Button testButtonText;
    // Scene buttonTextChangeTester;
     private boolean xturn;
-    Label X0Y0;
-    Label X0Y1;
-    Label X0Y2;
-    Label X1Y0;
-    Label X1Y1;
-    Label X1Y2;
-    Label X2Y0;
-    Label X2Y1;
-    Label X2Y2;
+//    Label X0Y0;
+//    Label X0Y1;
+//    Label X0Y2;
+//    Label X1Y0;
+//    Label X1Y1;
+//    Label X1Y2;
+//    Label X2Y0;
+//    Label X2Y1;
+//    Label X2Y2;
     Label[] cells;
     Scene sceneGameBoard;
     String[] row;
@@ -63,7 +64,10 @@ public class Main extends Application {
 //    Label X3Y0;
 //    Label X3Y1;
 //    Label X3Y2;
+    boolean[] spotUsed;
     private String piece;
+    boolean winResult;
+    boolean winMet;
 
 //    public Main(String piece) {
 //        this.piece = piece;
@@ -82,9 +86,9 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         window.setTitle("Tic-Tac-Toe");
        // primaryStage.setScene(new Scene(GridPane, 300, 275));
-startButton = new Button("test");
+startButton = new Button("Start");
 buttonTest2 = new Button("test2");
-titleText = new Label("Welcome");
+titleText = new Label("Welcome to Tic-Tac-Toe!");
 playerVsPlayer = new Button("P vs. P");
 playerVsComputer = new Button("P vs. C");
 mainMenu = new Label("Select a Game Mode");
@@ -94,7 +98,7 @@ O = new Button("O");
 backPlayerPlayer = new Button("Back");
 testDisplayName = new Button("Display Player Name");
 backPlayerPlayer2 = new Button("Back");
-testDisplayName2 = new Button("Display player name and continue.");
+gameStart = new Button("Continue.");
 playerName2 = new TextField();
 //testButtonText = new Button(" ");
         //temporarily the labels will not have blank text for testing to make sure they all show up.
@@ -107,15 +111,22 @@ playerName2 = new TextField();
         column = new String[3];
 //        for (int r=0; r<row.length; r++)
 
-X0Y0 = new Label("   1");
-X0Y1 = new Label("   1");
-X0Y2 = new Label("   1");
-X1Y0 = new Label("   1");
-X1Y1 = new Label("   1");
-X1Y2 = new Label("   1");
-X2Y0 = new Label("   1");
-X2Y1 = new Label("   1");
-X2Y2 = new Label("   1");
+        spotUsed = new boolean[9];
+        for (int j=0; j<spotUsed.length; j++) {
+            spotUsed[j] = false;
+        }
+        winResult = false;
+        winMet = false;
+
+//X0Y0 = new Label("   1");
+//X0Y1 = new Label("   1");
+//X0Y2 = new Label("   1");
+//X1Y0 = new Label("   1");
+//X1Y1 = new Label("   1");
+//X1Y2 = new Label("   1");
+//X2Y0 = new Label("   1");
+//X2Y1 = new Label("   1");
+//X2Y2 = new Label("   1");
 //X3Y0 = new Label("1");
 //X3Y1 = new Label("1");
 //X3Y2 = new Label("1");
@@ -163,7 +174,7 @@ playerVsPlayer.setOnAction(e -> window.setScene(scene4));
 BorderPane scene4_layout = new BorderPane();
 HBox XOChoice = new HBox(60);
 playerName_VBox = new VBox(10);
-playerName_VBox.getChildren().addAll(playerName,testDisplayName);
+playerName_VBox.getChildren().add(playerName);
 scene4_layout.setCenter(playerName_VBox);
 playerName.setPromptText("Player 1, enter your name.");
 
@@ -172,20 +183,20 @@ scene4_layout.setBottom(XOChoice);
 scene4 = new Scene(scene4_layout, 210, 300);
 
 backPlayerPlayer.setOnAction(e -> window.setScene(scene3));
-testDisplayName.setOnAction(new EventHandler<ActionEvent>() {
-    @Override
-    public void handle(ActionEvent event) {
-        System.out.println("Player 1: " + playerName.getText());
-        }
-    }
-);
+//testDisplayName.setOnAction(new EventHandler<ActionEvent>() {
+//    @Override
+//    public void handle(ActionEvent event) {
+//        System.out.println("Player 1: " + playerName.getText());
+//        }
+//    }
+//);
 
 X.setOnAction(new EventHandler<ActionEvent>() {
     @Override
     public void handle(ActionEvent event) {
         window.setScene(scene5);
         xturn = true;
-        System.out.println(xturn);
+      //  System.out.println(xturn);
     }
 });
 
@@ -196,7 +207,7 @@ O.setOnAction(new EventHandler<ActionEvent>() {
     public void handle(ActionEvent event) {
         window.setScene(scene5);
         xturn = false;
-        System.out.println(xturn);
+       // System.out.println(xturn);
     }
 });
 
@@ -205,19 +216,19 @@ O.setOnAction(new EventHandler<ActionEvent>() {
 BorderPane scene5_layout = new BorderPane();
 HBox XOChoiceP2 = new HBox(60);
 playerName_VBox2 = new VBox(10);
-playerName_VBox2.getChildren().addAll(playerName2,testDisplayName2);
+playerName_VBox2.getChildren().addAll(playerName2,gameStart);
 scene5_layout.setCenter(playerName_VBox2);
-playerName.setPromptText("Player 2, enter your name.");
+playerName2.setPromptText("Player 2, enter your name.");
 
 XOChoiceP2.getChildren().add(backPlayerPlayer2);
 scene5_layout.setBottom(XOChoiceP2);
 scene5 = new Scene(scene5_layout, 210, 300);
 
 backPlayerPlayer2.setOnAction(e -> window.setScene(scene4));
-testDisplayName2.setOnAction(new EventHandler<ActionEvent>() {
+gameStart.setOnAction(new EventHandler<ActionEvent>() {
     @Override
     public void handle(ActionEvent event) {
-        System.out.println("Player 2: " + playerName2.getText());
+     //   System.out.println("Player 2: " + playerName2.getText());
         window.setScene(sceneGameBoard);
         //below println is just for testing to see if it can remember what was entered for a name on scene4 in other
         // scenes or if a variable needs to be made to store the name in.
@@ -276,32 +287,32 @@ gameBoard_Layout.add(R1,0,0);
     gameBoard_Layout.add(cells[0], 0,0);
 
 gameBoard_Layout.add(R2,1,0);
-    gameBoard_Layout.add(X1Y0, 1,0);
-    X1Y0.setTextFill(Color.WHITE);
+    gameBoard_Layout.add(cells[1], 1,0);
+    cells[1].setTextFill(Color.WHITE);
 
 gameBoard_Layout.add(R3,2,0);
-    gameBoard_Layout.add(X2Y0, 2,0);
+        gameBoard_Layout.add(cells[2], 2,0);
 
 gameBoard_Layout.add(R4,0,1);
-    gameBoard_Layout.add(X0Y1, 0,1);
-    X0Y1.setTextFill(Color.WHITE);
+        gameBoard_Layout.add(cells[3], 0,1);
+        cells[3].setTextFill(Color.WHITE);
 
 gameBoard_Layout.add(R5,1,1);
-    gameBoard_Layout.add(X1Y1, 1,1);
+        gameBoard_Layout.add(cells[4], 1,1);
 
 gameBoard_Layout.add(R6,2,1);
-    gameBoard_Layout.add(X2Y1, 2,1);
-    X2Y1.setTextFill(Color.WHITE);
+        gameBoard_Layout.add(cells[5], 2,1);
+        cells[5].setTextFill(Color.WHITE);
 
 gameBoard_Layout.add(R7,0,2);
-    gameBoard_Layout.add(X0Y2, 0,2);
+        gameBoard_Layout.add(cells[6], 0,2);
 
 gameBoard_Layout.add(R8,1,2);
-    gameBoard_Layout.add(X1Y2, 1,2);
-    X1Y2.setTextFill(Color.WHITE);
+        gameBoard_Layout.add(cells[7], 1,2);
+        cells[7].setTextFill(Color.WHITE);
 
 gameBoard_Layout.add(R9,2,2);
-    gameBoard_Layout.add(X2Y2, 2,2);
+        gameBoard_Layout.add(cells[8], 2,2);
 
     //following is a test
 //    R1.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -322,11 +333,18 @@ gameBoard_Layout.add(R9,2,2);
                                  @Override
                                  public void handle(MouseEvent event) {
                                     //ask Mr. Walters about this when possible
-                                     row[0]="0";
+//                                     row[0]="0";
+                                     if (!spotUsed[0]) {
                                      piece = xturn? "   X": "   O";
-                                     if(cells[0].equals("   ")) {
+//                                     if(cells[0].equals("   ")) {
                                      cells[0].setText(piece);
+                                     ticTacToeLogic.winConditionCheck();
+                                     winResult();
+                                     if (winResult=true) {
+
+                                     }
                                      xturn = !xturn;
+                                     spotUsed[0]=true;
                                  }
 
                                   }
@@ -336,104 +354,176 @@ gameBoard_Layout.add(R9,2,2);
         R2.setOnMousePressed(new EventHandler<MouseEvent>() {
                                  @Override
                                  public void handle(MouseEvent event) {
-                                     // if(X0Y0.equals(1)) {
-                                     piece = xturn? "   X": "   O";
-                                     X1Y0.setText(piece);
-                                     xturn = !xturn;
-                                 }
+                                     //ask Mr. Walters about this when possible
+//                                     row[0]="0";
+                                     if (!spotUsed[1]) {
+                                         piece = xturn ? "   X" : "   O";
+//                                     if(cells[0].equals("   ")) {
+                                         cells[1].setText(piece);
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult = true) {
 
-                                 // }
+                                         }
+                                         xturn = !xturn;
+                                         spotUsed[1] = true;
+                                     }
+
+                                 }
                              }
         );
 
         R3.setOnMousePressed(new EventHandler<MouseEvent>() {
                                  @Override
                                  public void handle(MouseEvent event) {
-                                     // if(X0Y0.equals(1)) {
-                                     piece = xturn? "   X": "   O";
-                                     X2Y0.setText(piece);
-                                     xturn = !xturn;
-                                 }
+                                     //ask Mr. Walters about this when possible
+//                                     row[0]="0";
+                                     if (!spotUsed[2]) {
+                                         piece = xturn ? "   X" : "   O";
+//                                     if(cells[0].equals("   ")) {
+                                         cells[2].setText(piece);
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult = true) {
 
-                                 // }
+                                         }
+                                         xturn = !xturn;
+                                         spotUsed[2] = true;
+                                     }
+
+                                 }
                              }
         );
 
         R4.setOnMousePressed(new EventHandler<MouseEvent>() {
                                  @Override
                                  public void handle(MouseEvent event) {
-                                     // if(X0Y0.equals(1)) {
-                                     piece = xturn? "   X": "   O";
-                                     X0Y1.setText(piece);
-                                     xturn = !xturn;
-                                 }
+                                     //ask Mr. Walters about this when possible
+//                                     row[0]="0";
+                                     if (!spotUsed[3]) {
+                                         piece = xturn ? "   X" : "   O";
+//                                     if(cells[0].equals("   ")) {
+                                         cells[3].setText(piece);
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult = true) {
+                                             window.setScene(scene4);
+                                         }
+                                         xturn = !xturn;
+                                         spotUsed[3] = true;
+                                     }
 
-                                 // }
+                                 }
                              }
         );
 
         R5.setOnMousePressed(new EventHandler<MouseEvent>() {
                                  @Override
                                  public void handle(MouseEvent event) {
-                                     // if(X0Y0.equals(1)) {
-                                     piece = xturn? "   X": "   O";
-                                     X1Y1.setText(piece);
-                                     xturn = !xturn;
-                                 }
+                                     //ask Mr. Walters about this when possible
+//                                     row[0]="0";
+                                     if (!spotUsed[4]) {
+                                         piece = xturn ? "   X" : "   O";
+//                                     if(cells[0].equals("   ")) {
+                                         cells[4].setText(piece);
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult = true) {
 
-                                 // }
+                                         }
+                                         xturn = !xturn;
+                                         spotUsed[4] = true;
+                                     }
+
+                                 }
                              }
         );
 
         R6.setOnMousePressed(new EventHandler<MouseEvent>() {
                                  @Override
                                  public void handle(MouseEvent event) {
-                                     // if(X0Y0.equals(1)) {
-                                     piece = xturn? "   X": "   O";
-                                     X2Y1.setText(piece);
-                                     xturn = !xturn;
-                                 }
+                                     //ask Mr. Walters about this when possible
+//                                     row[0]="0";
+                                     if (!spotUsed[5]) {
+                                         piece = xturn ? "   X" : "   O";
+//                                     if(cells[0].equals("   ")) {
+                                         cells[5].setText(piece);
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult = true) {
 
-                                 // }
+                                         }
+                                         xturn = !xturn;
+                                         spotUsed[5] = true;
+                                     }
+
+                                 }
                              }
         );
 
         R7.setOnMousePressed(new EventHandler<MouseEvent>() {
                                  @Override
                                  public void handle(MouseEvent event) {
-                                     // if(X0Y0.equals(1)) {
-                                     piece = xturn? "   X": "   O";
-                                     X0Y2.setText(piece);
-                                     xturn = !xturn;
-                                 }
+                                     //ask Mr. Walters about this when possible
+//                                     row[0]="0";
+                                     if (!spotUsed[6]) {
+                                         piece = xturn ? "   X" : "   O";
+//                                     if(cells[0].equals("   ")) {
+                                         cells[6].setText(piece);
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult = true) {
 
-                                 // }
+                                         }
+                                         xturn = !xturn;
+                                         spotUsed[6] = true;
+                                     }
+
+                                 }
                              }
         );
 
         R8.setOnMousePressed(new EventHandler<MouseEvent>() {
                                  @Override
                                  public void handle(MouseEvent event) {
-                                     // if(X0Y0.equals(1)) {
-                                     piece = xturn? "   X": "   O";
-                                     X1Y2.setText(piece);
-                                     xturn = !xturn;
-                                 }
+                                     //ask Mr. Walters about this when possible
+//                                     row[0]="0";
+                                     if (!spotUsed[7]) {
+                                         piece = xturn ? "   X" : "   O";
+//                                     if(cells[0].equals("   ")) {
+                                         cells[7].setText(piece);
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult = true) {
 
-                                 // }
+                                         }
+                                         xturn = !xturn;
+                                         spotUsed[7] = true;
+                                     }
+
+                                 }
                              }
         );
 
         R9.setOnMousePressed(new EventHandler<MouseEvent>() {
                                  @Override
                                  public void handle(MouseEvent event) {
-                                     // if(X0Y0.equals(1)) {
-                                     piece = xturn? "   X": "   O";
-                                     X2Y2.setText(piece);
-                                     xturn = !xturn;
-                                 }
+                                     //ask Mr. Walters about this when possible
+//                                     row[0]="0";
+                                     if (!spotUsed[8]) {
+                                         piece = xturn ? "   X" : "   O";
+//                                     if(cells[0].equals("   ")) {
+                                         cells[8].setText(piece);
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult = true) {
 
-                                 // }
+                                         }
+                                         xturn = !xturn;
+                                         spotUsed[8] = true;
+                                     }
+
+                                 }
                              }
         );
 
@@ -443,20 +533,42 @@ gameBoard_Layout.add(R9,2,2);
 
 sceneGameBoard = new Scene(gameBoard_Layout,300,300);
 
+VBox scene6_layout = new VBox();
+
+scene6 = new Scene(scene6_layout, 210, 300);
+
+
+
+
+
+
+
         window.setScene(scene1);
 
         window.show();
     }
-    boolean checkSpot(String[] row, String[] column){
-        if(cells[row][column].equals("")) {
 
-            cells[row][column].setText(piece);
+    boolean winResult() {
+        if (winMet = true) {
+            winResult = true;
             return true;
-        }
-        else {
+        } else {
+            winResult = false;
             return false;
         }
     }
+
+
+//    boolean checkSpot(String[] row, String[] column){
+//        if(cells[row][column].equals("")) {
+//
+//            cells[row][column].setText(piece);
+//            return true;
+//        }
+//        else {
+//            return false;
+//        }
+//    }
 
 
     public static void main(String[] args) {
