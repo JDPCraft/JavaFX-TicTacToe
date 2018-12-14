@@ -29,7 +29,7 @@ public class Main extends Application {
     Button playerVsComputer;
     Label titleText;
     Label mainMenu;
-    Scene scene2;
+ //   Scene scene2;
     Scene scene1;
     Scene scene3;
     TextField playerName;
@@ -64,10 +64,17 @@ public class Main extends Application {
 //    Label X3Y0;
 //    Label X3Y1;
 //    Label X3Y2;
-    boolean[] spotUsed;
+   static boolean[] spotUsed;
     private String piece;
     boolean winResult;
-    boolean winMet;
+   static boolean winMet;
+   Label playerWon;
+   boolean xturnStart;
+   Label playAgain;
+   VBox endText;
+   HBox againButtons;
+   Button Yes;
+   Button No;
 
 //    public Main(String piece) {
 //        this.piece = piece;
@@ -117,6 +124,10 @@ playerName2 = new TextField();
         }
         winResult = false;
         winMet = false;
+        playerWon = new Label("Player " + xturn + "won!");
+        playAgain = new Label("Would you like to play again with the same settings?");
+        No = new Button("No");
+        Yes = new Button("Yes");
 
 //X0Y0 = new Label("   1");
 //X0Y1 = new Label("   1");
@@ -196,6 +207,7 @@ X.setOnAction(new EventHandler<ActionEvent>() {
     public void handle(ActionEvent event) {
         window.setScene(scene5);
         xturn = true;
+        xturnStart = false;
       //  System.out.println(xturn);
     }
 });
@@ -207,6 +219,7 @@ O.setOnAction(new EventHandler<ActionEvent>() {
     public void handle(ActionEvent event) {
         window.setScene(scene5);
         xturn = false;
+        xturnStart = false;
        // System.out.println(xturn);
     }
 });
@@ -338,13 +351,14 @@ gameBoard_Layout.add(R9,2,2);
                                      piece = xturn? "   X": "   O";
 //                                     if(cells[0].equals("   ")) {
                                      cells[0].setText(piece);
-                                     ticTacToeLogic.winConditionCheck();
-                                     winResult();
-                                     if (winResult=true) {
 
-                                     }
                                      xturn = !xturn;
                                      spotUsed[0]=true;
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult==true) {
+                                             window.setScene(scene6);
+                                         }
                                  }
 
                                   }
@@ -360,13 +374,14 @@ gameBoard_Layout.add(R9,2,2);
                                          piece = xturn ? "   X" : "   O";
 //                                     if(cells[0].equals("   ")) {
                                          cells[1].setText(piece);
-                                         ticTacToeLogic.winConditionCheck();
-                                         winResult();
-                                         if (winResult = true) {
 
-                                         }
                                          xturn = !xturn;
                                          spotUsed[1] = true;
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult==true) {
+                                             window.setScene(scene6);
+                                         }
                                      }
 
                                  }
@@ -382,13 +397,15 @@ gameBoard_Layout.add(R9,2,2);
                                          piece = xturn ? "   X" : "   O";
 //                                     if(cells[0].equals("   ")) {
                                          cells[2].setText(piece);
-                                         ticTacToeLogic.winConditionCheck();
-                                         winResult();
-                                         if (winResult = true) {
 
-                                         }
+
                                          xturn = !xturn;
                                          spotUsed[2] = true;
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult==true) {
+                                             window.setScene(scene6);
+                                         }
                                      }
 
                                  }
@@ -404,13 +421,14 @@ gameBoard_Layout.add(R9,2,2);
                                          piece = xturn ? "   X" : "   O";
 //                                     if(cells[0].equals("   ")) {
                                          cells[3].setText(piece);
-                                         ticTacToeLogic.winConditionCheck();
-                                         winResult();
-                                         if (winResult = true) {
-                                             window.setScene(scene4);
-                                         }
+
                                          xturn = !xturn;
                                          spotUsed[3] = true;
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult==true) {
+                                             window.setScene(scene6);
+                                         }
                                      }
 
                                  }
@@ -425,14 +443,17 @@ gameBoard_Layout.add(R9,2,2);
                                      if (!spotUsed[4]) {
                                          piece = xturn ? "   X" : "   O";
 //                                     if(cells[0].equals("   ")) {
-                                         cells[4].setText(piece);
-                                         ticTacToeLogic.winConditionCheck();
-                                         winResult();
-                                         if (winResult = true) {
 
-                                         }
+
+
+
                                          xturn = !xturn;
                                          spotUsed[4] = true;
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult==true) {
+                                             window.setScene(scene6);
+                                         }
                                      }
 
                                  }
@@ -448,13 +469,14 @@ gameBoard_Layout.add(R9,2,2);
                                          piece = xturn ? "   X" : "   O";
 //                                     if(cells[0].equals("   ")) {
                                          cells[5].setText(piece);
-                                         ticTacToeLogic.winConditionCheck();
-                                         winResult();
-                                         if (winResult = true) {
 
-                                         }
                                          xturn = !xturn;
                                          spotUsed[5] = true;
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult==true) {
+                                             window.setScene(scene6);
+                                         }
                                      }
 
                                  }
@@ -470,13 +492,14 @@ gameBoard_Layout.add(R9,2,2);
                                          piece = xturn ? "   X" : "   O";
 //                                     if(cells[0].equals("   ")) {
                                          cells[6].setText(piece);
-                                         ticTacToeLogic.winConditionCheck();
-                                         winResult();
-                                         if (winResult = true) {
 
-                                         }
                                          xturn = !xturn;
                                          spotUsed[6] = true;
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult==true) {
+                                             window.setScene(scene6);
+                                         }
                                      }
 
                                  }
@@ -492,13 +515,14 @@ gameBoard_Layout.add(R9,2,2);
                                          piece = xturn ? "   X" : "   O";
 //                                     if(cells[0].equals("   ")) {
                                          cells[7].setText(piece);
-                                         ticTacToeLogic.winConditionCheck();
-                                         winResult();
-                                         if (winResult = true) {
 
-                                         }
                                          xturn = !xturn;
                                          spotUsed[7] = true;
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult==true) {
+                                             window.setScene(scene6);
+                                         }
                                      }
 
                                  }
@@ -514,13 +538,14 @@ gameBoard_Layout.add(R9,2,2);
                                          piece = xturn ? "   X" : "   O";
 //                                     if(cells[0].equals("   ")) {
                                          cells[8].setText(piece);
-                                         ticTacToeLogic.winConditionCheck();
-                                         winResult();
-                                         if (winResult = true) {
 
-                                         }
                                          xturn = !xturn;
                                          spotUsed[8] = true;
+                                         ticTacToeLogic.winConditionCheck();
+                                         winResult();
+                                         if (winResult==true) {
+                                             window.setScene(scene6);
+                                         }
                                      }
 
                                  }
@@ -533,13 +558,36 @@ gameBoard_Layout.add(R9,2,2);
 
 sceneGameBoard = new Scene(gameBoard_Layout,300,300);
 
-VBox scene6_layout = new VBox();
-
+BorderPane scene6_layout = new BorderPane();
+endText = new VBox(20);
+againButtons = new HBox(60);
+    endText.getChildren().addAll(playerWon,playAgain);
+    againButtons.getChildren().addAll(Yes,No);
+    scene6_layout.setCenter(endText);
+    scene6_layout.setBottom(againButtons);
 scene6 = new Scene(scene6_layout, 210, 300);
 
-
-
-
+Yes.setOnAction(new EventHandler<ActionEvent>() {
+    @Override
+    public void handle(ActionEvent event) {
+        if (xturnStart==false) {
+            xturn = false;
+            window.setScene(sceneGameBoard);
+        }
+        if (xturnStart==true) {
+            xturn = true;
+            window.setScene(sceneGameBoard);
+        }
+                    }
+                }
+            );
+No.setOnAction(new EventHandler<ActionEvent>() {
+                   @Override
+                   public void handle(ActionEvent event) {
+                        window.setScene(scene3);
+                   }
+               }
+    );
 
 
 
@@ -549,7 +597,7 @@ scene6 = new Scene(scene6_layout, 210, 300);
     }
 
     boolean winResult() {
-        if (winMet = true) {
+        if (winMet == true) {
             winResult = true;
             return true;
         } else {

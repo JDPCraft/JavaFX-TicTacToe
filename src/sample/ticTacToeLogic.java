@@ -19,7 +19,11 @@ public class ticTacToeLogic {
 
 
 
-        static void winConditionCheck(){
+        static void winConditionCheck(/*String piece*/){
+       //     piece.equalsIgnoreCase(Main.ce)
+            if (!Main.spotUsed[0] || !Main.spotUsed[1] && !Main.spotUsed[2] || !Main.spotUsed[3] || Main.spotUsed[4] || !Main.spotUsed[5] || !Main.spotUsed[6] || !Main.spotUsed[7] || !Main.spotUsed[8]) {
+//Main.winMet = false;
+          //  }
             if (Main.spotUsed[0] == Main.spotUsed[3] == Main.spotUsed[6]) {
                 Main.winMet = true;
             } else if (Main.spotUsed[1] == Main.spotUsed[4] == Main.spotUsed[7]) {
@@ -32,10 +36,11 @@ public class ticTacToeLogic {
                 Main.winMet = true;
             } else if (Main.spotUsed[6] == Main.spotUsed[7] == Main.spotUsed[8]) {
                 Main.winMet = true;
-            } else if (Main.spotUsed[1] == Main.spotUsed[4] == Main.spotUsed[7]) {
+            } else if (Main.spotUsed[0] == Main.spotUsed[4] == Main.spotUsed[8]) {
                 Main.winMet = true;
-            } else if (Main.spotUsed[1] == Main.spotUsed[4] == Main.spotUsed[7]) {
+            } else if (Main.spotUsed[2] == Main.spotUsed[4] == Main.spotUsed[6]) {
                 Main.winMet = true;
+            }
             } else {
                 Main.winMet = false;
             }
