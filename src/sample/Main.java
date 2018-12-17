@@ -57,7 +57,7 @@ public class Main extends Application {
 //    Label X2Y0;
 //    Label X2Y1;
 //    Label X2Y2;
-    Label[] cells;
+    static Label[] cells;
     Scene sceneGameBoard;
     String[] row;
     String[] column;
@@ -65,7 +65,7 @@ public class Main extends Application {
 //    Label X3Y1;
 //    Label X3Y2;
    static boolean[] spotUsed;
-    private String piece;
+   static String piece;
     boolean winResult;
    static boolean winMet;
    Label playerWon;
@@ -75,7 +75,7 @@ public class Main extends Application {
    HBox againButtons;
    Button Yes;
    Button No;
-
+String winner;
 //    public Main(String piece) {
 //        this.piece = piece;
 //    }
@@ -124,10 +124,11 @@ playerName2 = new TextField();
         }
         winResult = false;
         winMet = false;
-        playerWon = new Label("Player " + xturn + "won!");
+        playerWon = new Label("Player " + winner + " won!");
         playAgain = new Label("Would you like to play again with the same settings?");
         No = new Button("No");
         Yes = new Button("Yes");
+    winner = " ";
 
 //X0Y0 = new Label("   1");
 //X0Y1 = new Label("   1");
@@ -354,9 +355,10 @@ gameBoard_Layout.add(R9,2,2);
 
                                      xturn = !xturn;
                                      spotUsed[0]=true;
-                                         ticTacToeLogic.winConditionCheck();
+                                         ticTacToeLogic.winConditionCheck(piece);
                                          winResult();
                                          if (winResult==true) {
+
                                              window.setScene(scene6);
                                          }
                                  }
@@ -377,9 +379,10 @@ gameBoard_Layout.add(R9,2,2);
 
                                          xturn = !xturn;
                                          spotUsed[1] = true;
-                                         ticTacToeLogic.winConditionCheck();
+                                         ticTacToeLogic.winConditionCheck(piece);
                                          winResult();
                                          if (winResult==true) {
+
                                              window.setScene(scene6);
                                          }
                                      }
@@ -401,9 +404,10 @@ gameBoard_Layout.add(R9,2,2);
 
                                          xturn = !xturn;
                                          spotUsed[2] = true;
-                                         ticTacToeLogic.winConditionCheck();
+                                         ticTacToeLogic.winConditionCheck(piece);
                                          winResult();
                                          if (winResult==true) {
+
                                              window.setScene(scene6);
                                          }
                                      }
@@ -424,9 +428,10 @@ gameBoard_Layout.add(R9,2,2);
 
                                          xturn = !xturn;
                                          spotUsed[3] = true;
-                                         ticTacToeLogic.winConditionCheck();
+                                         ticTacToeLogic.winConditionCheck(piece);
                                          winResult();
                                          if (winResult==true) {
+
                                              window.setScene(scene6);
                                          }
                                      }
@@ -443,15 +448,16 @@ gameBoard_Layout.add(R9,2,2);
                                      if (!spotUsed[4]) {
                                          piece = xturn ? "   X" : "   O";
 //                                     if(cells[0].equals("   ")) {
-
+                                         cells[4].setText(piece);
 
 
 
                                          xturn = !xturn;
                                          spotUsed[4] = true;
-                                         ticTacToeLogic.winConditionCheck();
+                                         ticTacToeLogic.winConditionCheck(piece);
                                          winResult();
                                          if (winResult==true) {
+
                                              window.setScene(scene6);
                                          }
                                      }
@@ -472,9 +478,10 @@ gameBoard_Layout.add(R9,2,2);
 
                                          xturn = !xturn;
                                          spotUsed[5] = true;
-                                         ticTacToeLogic.winConditionCheck();
+                                         ticTacToeLogic.winConditionCheck(piece);
                                          winResult();
                                          if (winResult==true) {
+
                                              window.setScene(scene6);
                                          }
                                      }
@@ -495,9 +502,10 @@ gameBoard_Layout.add(R9,2,2);
 
                                          xturn = !xturn;
                                          spotUsed[6] = true;
-                                         ticTacToeLogic.winConditionCheck();
+                                         ticTacToeLogic.winConditionCheck(piece);
                                          winResult();
                                          if (winResult==true) {
+
                                              window.setScene(scene6);
                                          }
                                      }
@@ -518,9 +526,10 @@ gameBoard_Layout.add(R9,2,2);
 
                                          xturn = !xturn;
                                          spotUsed[7] = true;
-                                         ticTacToeLogic.winConditionCheck();
+                                         ticTacToeLogic.winConditionCheck(piece);
                                          winResult();
                                          if (winResult==true) {
+
                                              window.setScene(scene6);
                                          }
                                      }
@@ -541,9 +550,10 @@ gameBoard_Layout.add(R9,2,2);
 
                                          xturn = !xturn;
                                          spotUsed[8] = true;
-                                         ticTacToeLogic.winConditionCheck();
+                                         ticTacToeLogic.winConditionCheck(piece);
                                          winResult();
                                          if (winResult==true) {
+
                                              window.setScene(scene6);
                                          }
                                      }
